@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "net.grzechocinski.android.droidconkrakow"
-        minSdkVersion 9
+        minSdkVersion 10
         targetSdkVersion 21
 
         versionCode 1
@@ -16,10 +16,12 @@ android {
     buildTypes {
         debug{
             applicationIdSuffix ".debug"
+            debuggable = true
         }
     }
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:21.0.2'
+    compile 'com.android.support:support-v4:21.0.2'
+    compile 'com.android.support:recyclerview-v7:21.0.2'
 }

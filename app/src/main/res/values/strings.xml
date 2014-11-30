@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Droidcon Async Operations demo</string>
+    <string name="run_demo_1">Run demo 1</string>
+    <string name="run_demo_2">Run demo 2</string>
+    <string name="run_demo_3">Run demo 3</string>
+    <string name="run_demo_4">Run demo 4</string>
+    <string name="run_demo_5">Run demo 5</string>
+    <string name="run_demo_6">Run demo 6</string>
+    <string name="run_demo_7">Run demo 7</string>
+    <string name="run_demo_8">Run demo 8</string>
+    <string name="run_demo_9">Run demo 9</string>
+    <string name="run_loader">Run loader</string>
+    <string name="reset_loader">Reset loader</string>
+    <string name="open_2nd_activity">Second activity</string>
+    <string name="refresh">Run!</string>
+    <string name="run_gc">Run System.gc()</string>
+</resources>

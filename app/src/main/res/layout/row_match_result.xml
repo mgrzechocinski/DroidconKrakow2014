@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.grzechocinski.android.droidconkrakow.ui.MatchResultLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="wrap_content">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:id="@+id/id_tv_home_name"
+                />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:padding="5dp"
+                  android:gravity="center"
+                  android:text="-"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:padding="5dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/id_tv_away_name"
+                />
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:gravity="center_vertical|right">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:text="2"
+                android:layout_height="wrap_content"
+                android:id="@+id/id_tv_home_goals"
+                />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:padding="10dp"
+                  android:gravity="center"
+                  android:text=":"/>
+
+        <TextView
+                android:id="@+id/id_tv_away_goals"
+                android:layout_width="wrap_content"
+                android:text="0"
+                android:layout_height="wrap_content"
+                />
+
+    </LinearLayout>
+</net.grzechocinski.android.droidconkrakow.ui.MatchResultLayout>
