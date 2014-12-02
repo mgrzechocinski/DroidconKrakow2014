@@ -10,6 +10,7 @@ import net.grzechocinski.android.droidconkrakow.demo3.ActivityWithLoaderWithForc
 import net.grzechocinski.android.droidconkrakow.demo4.ActivityWithLoaderWhichSupportsScreenRotation;
 import net.grzechocinski.android.droidconkrakow.demo5.ActivityWithLoaderWhichSupportsOnStopAndRedelivery;
 import net.grzechocinski.android.droidconkrakow.demo6.ActivityWithLoaderWhichSupportsRefreshWithoutCaching;
+import net.grzechocinski.android.droidconkrakow.demo7.ActivityWithRobospice;
 
 
 public class DemoActivity extends FragmentActivity implements View.OnClickListener {
@@ -40,6 +41,9 @@ public class DemoActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.btn_run_demo6:
                 startActivity(new Intent(this, ActivityWithLoaderWhichSupportsRefreshWithoutCaching.class));
+                break;
+            case R.id.btn_run_demo7:
+                startActivity(new Intent(this, ActivityWithRobospice.class));
                 break;
             case R.id.btn_run_gc:
                 System.gc();
