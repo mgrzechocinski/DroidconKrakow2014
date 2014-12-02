@@ -22,12 +22,10 @@
         <activity android:name=".demo5.ActivityWithLoaderWhichSupportsOnStopAndRedelivery" />
         <activity android:name=".demo6.ActivityWithLoaderWhichSupportsRefreshWithoutCaching" />
         <activity android:name=".demo7.ActivityWithRobospice" />
+        <activity android:name=".demo8.ActivityWithRobospiceWithOrientationSupport" />
 
-        <service
-            android:name=".demo7.DemoSpiceService"
-            android:enabled="true"
-            android:exported="false" >
-        </service>
+        <service android:name=".demo7.DemoSpiceService" android:enabled="true" android:exported="false" />
+        <service android:name=".demo8.DemoSpiceService" android:enabled="true" android:exported="false" />
     </application>
 
 </manifest>

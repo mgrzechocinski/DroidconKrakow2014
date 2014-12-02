@@ -1,26 +1,26 @@
-package net.grzechocinski.android.droidconkrakow.demo7;
+package net.grzechocinski.android.droidconkrakow.demo8;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.PendingRequestListener;
 import com.octo.android.robospice.request.listener.RequestListener;
 import java.util.ArrayList;
 import net.grzechocinski.android.droidconkrakow.R;
 import net.grzechocinski.android.droidconkrakow.data.Match;
-import net.grzechocinski.android.droidconkrakow.demo6.MatchResultLoader;
+import net.grzechocinski.android.droidconkrakow.demo7.DemoSpiceService;
+import net.grzechocinski.android.droidconkrakow.demo7.MatchResultRequest;
 import net.grzechocinski.android.droidconkrakow.ui.MatchesAdapter;
 
-public class ActivityWithRobospice extends FragmentActivity implements View.OnClickListener, RequestListener<Match> {
+public class ActivityWithRobospiceWithOrientationSupport extends FragmentActivity implements View.OnClickListener, RequestListener<Match>,
+        PendingRequestListener<Match> {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
 
@@ -77,6 +77,7 @@ public class ActivityWithRobospice extends FragmentActivity implements View.OnCl
     protected void onStart() {
         super.onStart();
         spiceManager.start(this);
+        spiceManager.addListenerIfPending(Match.class, "cacheKey", this);
     }
 
     @Override
@@ -91,7 +92,7 @@ public class ActivityWithRobospice extends FragmentActivity implements View.OnCl
         adapter.notifyDataSetChanged();
         int matchID = 1;
         MatchResultRequest request = new MatchResultRequest(Match.class, matchID);
-        spiceManager.execute(request, "cacheKey", 3000, this);
+        spiceManager.execute(request, "cacheKey", DurationInMillis.ALWAYS_EXPIRED, this);
     }
 
 
@@ -106,5 +107,9 @@ public class ActivityWithRobospice extends FragmentActivity implements View.OnCl
         currentMatches.add(match);
         adapter.setCurrentMatches(currentMatches);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onRequestNotFound() {
     }
 }
