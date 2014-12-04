@@ -73,6 +73,13 @@
                 android:text="@string/run_demo_9"/>
 
         <Button
+                android:id="@+id/btn_run_demo10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClick"
+                android:text="@string/run_demo_10"/>
+
+        <Button
                 android:id="@+id/btn_run_gc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

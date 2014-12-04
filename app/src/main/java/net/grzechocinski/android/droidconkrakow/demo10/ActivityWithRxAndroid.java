@@ -1,4 +1,4 @@
-package net.grzechocinski.android.droidconkrakow.demo9;
+package net.grzechocinski.android.droidconkrakow.demo10;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -18,6 +18,7 @@ import net.grzechocinski.android.droidconkrakow.util.Delay;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.events.OnClickEvent;
 import rx.android.operators.OperatorViewClick;
 import rx.android.schedulers.AndroidSchedulers;
@@ -39,6 +40,8 @@ public class ActivityWithRxAndroid extends FragmentActivity {
     private ArrayList<Match> currentMatches = new ArrayList<>();
 
     protected SpiceManager spiceManager = new SpiceManager(DemoSpiceService.class);
+
+    private Subscription subscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,9 @@ public class ActivityWithRxAndroid extends FragmentActivity {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadData(1)
+                unsubscribe();
+                subscription = loadData(1)
+                        .cache()
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Action1<Match>() {
@@ -119,6 +124,13 @@ public class ActivityWithRxAndroid extends FragmentActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        unsubscribe();
+    }
+
+    private void unsubscribe() {
+        if(subscription != null){
+            subscription.unsubscribe();
+        }
     }
 
     private Observable<Match> loadData(final int matchID) {

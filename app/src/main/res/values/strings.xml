@@ -10,9 +10,11 @@
     <string name="run_demo_7">Run demo 7</string>
     <string name="run_demo_8">Run demo 8</string>
     <string name="run_demo_9">Run demo 9</string>
+    <string name="run_demo_10">Run demo 10</string>
     <string name="run_loader">Run loader</string>
     <string name="reset_loader">Reset loader</string>
     <string name="open_2nd_activity">Second activity</string>
     <string name="refresh">Run!</string>
     <string name="run_gc">Run System.gc()</string>
+    <string name="chars">Remaining characters %1$s</string>
 </resources>

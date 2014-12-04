@@ -24,7 +24,8 @@
         <activity android:label="@string/run_demo_6" android:name=".demo6.ActivityWithLoaderWhichSupportsRefreshWithoutCaching" />
         <activity android:label="@string/run_demo_7" android:name=".demo7.ActivityWithRobospice" />
         <activity android:label="@string/run_demo_8" android:name=".demo8.ActivityWithRobospiceWithOrientationSupport" />
-        <activity android:label="@string/run_demo_9" android:name=".demo9.ActivityWithRxAndroid" />
+        <activity android:label="@string/run_demo_9" android:name=".demo9.ComposeMessageActivity" />
+        <activity android:label="@string/run_demo_10" android:name=".demo10.ActivityWithRxAndroid" />
 
         <service android:name=".demo7.DemoSpiceService" android:enabled="true" android:exported="false" />
         <service android:name=".demo8.DemoSpiceService" android:enabled="true" android:exported="false" />
