@@ -4,6 +4,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.14.+'
+        classpath 'me.tatarka:gradle-retrolambda:2.4.1'
     }
 }
 
