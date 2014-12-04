@@ -22,8 +22,6 @@ public class ActivityWithLoaderNoForceLoad extends FragmentActivity implements V
 
     private static final String MATCH_ID = "MATCH_ID";
 
-    private Button refreshButton;
-
     private MatchesAdapter adapter;
 
     private ArrayList<Match> currentMatches = new ArrayList<>();
@@ -33,27 +31,7 @@ public class ActivityWithLoaderNoForceLoad extends FragmentActivity implements V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matches);
 
-        refreshButton = (Button) findViewById(R.id.id_btn_refresh);
-        refreshButton.setOnClickListener(this);
-
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.id_recyclerView);
-        recyclerView.setHasFixedSize(true);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        if (savedInstanceState != null) {
-            currentMatches = (ArrayList<Match>) savedInstanceState.getSerializable(KEY_MATCHES);
-        }
-
-        adapter = new MatchesAdapter(currentMatches);
-        recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable(KEY_MATCHES, new ArrayList<>(currentMatches));
+        configureUIComponents(savedInstanceState);
     }
 
     @Override
@@ -99,5 +77,29 @@ public class ActivityWithLoaderNoForceLoad extends FragmentActivity implements V
     @Override
     public void onLoaderReset(Loader<Match> loader) {
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(KEY_MATCHES, new ArrayList<>(currentMatches));
+    }
+
+    private void configureUIComponents(Bundle savedInstanceState) {
+        Button refreshButton = (Button) findViewById(R.id.id_btn_refresh);
+        refreshButton.setOnClickListener(this);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.id_recyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        if (savedInstanceState != null) {
+            currentMatches = (ArrayList<Match>) savedInstanceState.getSerializable(KEY_MATCHES);
+        }
+
+        adapter = new MatchesAdapter(currentMatches);
+        recyclerView.setAdapter(adapter);
     }
 }

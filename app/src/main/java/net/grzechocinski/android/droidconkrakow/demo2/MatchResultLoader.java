@@ -11,8 +11,6 @@ public class MatchResultLoader extends AsyncTaskLoader<Match> {
 
     private final int matchId;
 
-    private Match result;
-
     public MatchResultLoader(Context context, int matchId) {
         super(context);
         this.matchId = matchId;
@@ -46,7 +44,7 @@ public class MatchResultLoader extends AsyncTaskLoader<Match> {
     public Match loadInBackground() {
         Log.d("", "Loading match with id " + matchId);
         Delay.delayThreadForSeconds(3);
-        result = MatchDataSource.matches.get(matchId);
+        Match result = MatchDataSource.matches.get(matchId);
         Log.d("", "Loaded match with id " + matchId + " => " + result);
         return result;
     }
