@@ -4,14 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import net.grzechocinski.android.droidconkrakow.demo1.ActivityWithInnerAsyncTask;
-import net.grzechocinski.android.droidconkrakow.demo2.ActivityWithMultipleAsyncTasks;
+import net.grzechocinski.android.droidconkrakow.demo1.ActivityWithMultipleAsyncTasks;
+import net.grzechocinski.android.droidconkrakow.demo2.ActivityWithLoaderNoForceLoad;
 import net.grzechocinski.android.droidconkrakow.demo3.ActivityWithLoaderWithForceLoad;
 import net.grzechocinski.android.droidconkrakow.demo4.ActivityWithLoaderWhichSupportsScreenRotation;
 import net.grzechocinski.android.droidconkrakow.demo5.ActivityWithLoaderWhichSupportsOnStopAndRedelivery;
 import net.grzechocinski.android.droidconkrakow.demo6.ActivityWithLoaderWhichSupportsRefreshWithoutCaching;
 import net.grzechocinski.android.droidconkrakow.demo7.ActivityWithRobospice;
 import net.grzechocinski.android.droidconkrakow.demo8.ActivityWithRobospiceWithOrientationSupport;
+import net.grzechocinski.android.droidconkrakow.demo9.ActivityWithRxAndroid;
 
 
 public class DemoActivity extends FragmentActivity implements View.OnClickListener {
@@ -26,10 +27,10 @@ public class DemoActivity extends FragmentActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_run_demo1:
-                startActivity(new Intent(this, ActivityWithInnerAsyncTask.class));
+                startActivity(new Intent(this, ActivityWithMultipleAsyncTasks.class));
                 break;
             case R.id.btn_run_demo2:
-                startActivity(new Intent(this, ActivityWithMultipleAsyncTasks.class));
+                startActivity(new Intent(this, ActivityWithLoaderNoForceLoad.class));
                 break;
             case R.id.btn_run_demo3:
                 startActivity(new Intent(this, ActivityWithLoaderWithForceLoad.class));
@@ -48,6 +49,9 @@ public class DemoActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.btn_run_demo8:
                 startActivity(new Intent(this, ActivityWithRobospiceWithOrientationSupport.class));
+                break;
+            case R.id.btn_run_demo9:
+                startActivity(new Intent(this, ActivityWithRxAndroid.class));
                 break;
             case R.id.btn_run_gc:
                 System.gc();

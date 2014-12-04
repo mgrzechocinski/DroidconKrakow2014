@@ -29,6 +29,7 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:21.0.2'
     compile 'com.android.support:recyclerview-v7:21.0.2'
+    compile 'io.reactivex:rxandroid:0.22.0'
     compile ('com.octo.android.robospice:robospice:1.4.14'){
         exclude module: 'commons-io'
     }

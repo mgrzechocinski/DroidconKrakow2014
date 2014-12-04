@@ -1,4 +1,4 @@
-package net.grzechocinski.android.droidconkrakow.demo2;
+package net.grzechocinski.android.droidconkrakow.demo1;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -29,23 +29,7 @@ public class ActivityWithMultipleAsyncTasks extends Activity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matches);
-
-        refreshButton = (Button) findViewById(R.id.id_btn_refresh);
-        refreshButton.setOnClickListener(this);
-
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.id_recyclerView);
-        recyclerView.setHasFixedSize(true);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        if (savedInstanceState != null) {
-            currentMatches = (ArrayList<Match>) savedInstanceState.getSerializable(KEY_MATCHES);
-        }
-
-        adapter = new MatchesAdapter(currentMatches);
-        recyclerView.setAdapter(adapter);
-
+        configureUIComponents(savedInstanceState);
     }
 
     @Override
@@ -84,7 +68,7 @@ public class ActivityWithMultipleAsyncTasks extends Activity implements View.OnC
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Log.d(this.getClass().getSimpleName(), "Loading match with id: " + matchId);
+            Log.d(this.getClass().getSimpleName() + "#onPreExecute", "Loading match with id: " + matchId);
             refreshButton.setEnabled(false);
         }
 
@@ -92,7 +76,7 @@ public class ActivityWithMultipleAsyncTasks extends Activity implements View.OnC
         protected Match doInBackground(Void... params) {
             Delay.delayThreadForSeconds(5);
             Match match = MatchDataSource.matches.get(matchId);
-            Log.d(this.getClass().getSimpleName(), "Loaded match (id " + matchId + "): " + match);
+            Log.d(this.getClass().getSimpleName() + "#doInBackground", "Loaded match (id " + matchId + "): " + match);
             return match;
         }
 
@@ -104,5 +88,23 @@ public class ActivityWithMultipleAsyncTasks extends Activity implements View.OnC
             adapter.notifyDataSetChanged();
             ActivityWithMultipleAsyncTasks.this.refreshButton.setEnabled(true);
         }
+
+    }
+    private void configureUIComponents(Bundle savedInstanceState) {
+        refreshButton = (Button) findViewById(R.id.id_btn_refresh);
+        refreshButton.setOnClickListener(this);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.id_recyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        if (savedInstanceState != null) {
+            currentMatches = (ArrayList<Match>) savedInstanceState.getSerializable(KEY_MATCHES);
+        }
+
+        adapter = new MatchesAdapter(currentMatches);
+        recyclerView.setAdapter(adapter);
     }
 }

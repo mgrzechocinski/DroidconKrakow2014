@@ -74,6 +74,7 @@ public class ActivityWithLoaderWhichSupportsScreenRotation extends FragmentActiv
     }
 
     private void initLoader() {
+        currentMatches.clear();
         Bundle bundle = prepareBundle();
         getSupportLoaderManager().initLoader(1, bundle, this);
     }

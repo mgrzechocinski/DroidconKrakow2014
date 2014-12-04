@@ -4,6 +4,7 @@
 
     <application
         android:icon="@drawable/ic_launcher"
+        android:name=".DemoApp"
         android:label="@string/app_name"
         android:theme="@style/DroidconKrakowTheme" >
         <activity
@@ -15,14 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".demo1.ActivityWithInnerAsyncTask" />
-        <activity android:name=".demo2.ActivityWithMultipleAsyncTasks" />
-        <activity android:name=".demo3.ActivityWithLoaderWithForceLoad" />
-        <activity android:name=".demo4.ActivityWithLoaderWhichSupportsScreenRotation" />
-        <activity android:name=".demo5.ActivityWithLoaderWhichSupportsOnStopAndRedelivery" />
-        <activity android:name=".demo6.ActivityWithLoaderWhichSupportsRefreshWithoutCaching" />
-        <activity android:name=".demo7.ActivityWithRobospice" />
-        <activity android:name=".demo8.ActivityWithRobospiceWithOrientationSupport" />
+        <activity android:label="@string/run_demo_1" android:name=".demo1.ActivityWithMultipleAsyncTasks" />
+        <activity android:label="@string/run_demo_2" android:name=".demo2.ActivityWithLoaderNoForceLoad" />
+        <activity android:label="@string/run_demo_3" android:name=".demo3.ActivityWithLoaderWithForceLoad" />
+        <activity android:label="@string/run_demo_4" android:name=".demo4.ActivityWithLoaderWhichSupportsScreenRotation" />
+        <activity android:label="@string/run_demo_5" android:name=".demo5.ActivityWithLoaderWhichSupportsOnStopAndRedelivery" />
+        <activity android:label="@string/run_demo_6" android:name=".demo6.ActivityWithLoaderWhichSupportsRefreshWithoutCaching" />
+        <activity android:label="@string/run_demo_7" android:name=".demo7.ActivityWithRobospice" />
+        <activity android:label="@string/run_demo_8" android:name=".demo8.ActivityWithRobospiceWithOrientationSupport" />
+        <activity android:label="@string/run_demo_9" android:name=".demo9.ActivityWithRxAndroid" />
 
         <service android:name=".demo7.DemoSpiceService" android:enabled="true" android:exported="false" />
         <service android:name=".demo8.DemoSpiceService" android:enabled="true" android:exported="false" />

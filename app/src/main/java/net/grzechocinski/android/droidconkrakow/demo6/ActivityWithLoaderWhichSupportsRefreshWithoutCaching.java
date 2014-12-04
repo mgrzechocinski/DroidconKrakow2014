@@ -74,6 +74,7 @@ public class ActivityWithLoaderWhichSupportsRefreshWithoutCaching extends Fragme
     }
 
     private void initLoader() {
+        currentMatches.clear();
         Bundle bundle = prepareBundle();
         getSupportLoaderManager().initLoader(1, bundle, this);
     }

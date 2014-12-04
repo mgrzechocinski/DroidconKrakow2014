@@ -19,4 +19,11 @@ public class MatchResultRequest extends SpiceRequest<Match> {
         Delay.delayThreadForSeconds(3);
         return MatchDataSource.matches.get(matchID);
     }
+
+    @Override
+    public String toString() {
+        return "MatchResultRequest{" +
+                "matchID=" + matchID +
+                '}';
+    }
 }

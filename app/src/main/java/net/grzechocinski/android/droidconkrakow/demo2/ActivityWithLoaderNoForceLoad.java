@@ -1,8 +1,9 @@
-package net.grzechocinski.android.droidconkrakow.demo1;
+package net.grzechocinski.android.droidconkrakow.demo2;
 
-import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,13 +12,15 @@ import android.widget.Button;
 import java.util.ArrayList;
 import net.grzechocinski.android.droidconkrakow.R;
 import net.grzechocinski.android.droidconkrakow.data.Match;
-import net.grzechocinski.android.droidconkrakow.data.MatchDataSource;
 import net.grzechocinski.android.droidconkrakow.ui.MatchesAdapter;
-import net.grzechocinski.android.droidconkrakow.util.Delay;
 
-public class ActivityWithInnerAsyncTask extends Activity implements View.OnClickListener {
+public class ActivityWithLoaderNoForceLoad extends FragmentActivity implements View.OnClickListener, LoaderManager.LoaderCallbacks<Match> {
+
+    private final String LOG_TAG = this.getClass().getSimpleName();
 
     private static final String KEY_MATCHES = "currentMatches";
+
+    private static final String MATCH_ID = "MATCH_ID";
 
     private Button refreshButton;
 
@@ -39,13 +42,12 @@ public class ActivityWithInnerAsyncTask extends Activity implements View.OnClick
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             currentMatches = (ArrayList<Match>) savedInstanceState.getSerializable(KEY_MATCHES);
         }
 
         adapter = new MatchesAdapter(currentMatches);
         recyclerView.setAdapter(adapter);
-
     }
 
     @Override
@@ -67,33 +69,35 @@ public class ActivityWithInnerAsyncTask extends Activity implements View.OnClick
         currentMatches.clear();
         adapter.setCurrentMatches(currentMatches);
         adapter.notifyDataSetChanged();
+        initLoader();
+    }
 
-        final int matchID = 0;
+    private void initLoader() {
+        Bundle bundle = prepareBundle();
+        getSupportLoaderManager().initLoader(1, bundle, this);
+    }
 
-        new AsyncTask<Void, Void, Match>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                Log.d(this.getClass().getSimpleName(), "Loading match with id: " + matchID);
-                refreshButton.setEnabled(false);
-            }
+    private Bundle prepareBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(MATCH_ID, 1);
+        return bundle;
+    }
 
-            @Override
-            protected Match doInBackground(Void... params) {
-                Delay.delayThreadForSeconds(5);
-                Match match = MatchDataSource.matches.get(matchID);
-                Log.d(this.getClass().getSimpleName(), "Loaded match (id " + matchID + "): " + match);
-                return match;
-            }
+    @Override
+    public Loader<Match> onCreateLoader(int id, Bundle args) {
+        return new MatchResultLoader(this, args.getInt(MATCH_ID));
+    }
 
-            @Override
-            protected void onPostExecute(Match match) {
-                super.onPostExecute(match);
-                currentMatches.add(match);
-                adapter.setCurrentMatches(currentMatches);
-                adapter.notifyDataSetChanged();
-                ActivityWithInnerAsyncTask.this.refreshButton.setEnabled(true);
-            }
-        }.execute();
+    @Override
+    public void onLoadFinished(Loader<Match> loader, Match match) {
+        Log.d(LOG_TAG, "onLoadFinished: " + match);
+        currentMatches.add(match);
+        adapter.setCurrentMatches(currentMatches);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Match> loader) {
+
     }
 }

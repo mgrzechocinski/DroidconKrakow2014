@@ -37,4 +37,9 @@ public class DemoSpiceService extends SpiceService {
         cacheManager.addPersister(jacksonObjectPersisterFactory);
         return cacheManager;
     }
+
+    @Override
+    public int getThreadCount() {
+        return 10;
+    }
 }
