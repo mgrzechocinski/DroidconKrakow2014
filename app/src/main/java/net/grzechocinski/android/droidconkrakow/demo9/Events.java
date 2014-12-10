@@ -39,11 +39,7 @@ public class Events {
      */
     public static Observable<Object> click(View view) {
         final PublishSubject<Object> subject = PublishSubject.create();
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
-                subject.onNext(new Object());
-            }
-        });
+        view.setOnClickListener(view1 -> subject.onNext(new Object()));
         return subject;
     }
 
@@ -52,11 +48,7 @@ public class Events {
      */
     public static Observable<Integer> itemClick(AbsListView view) {
         final PublishSubject<Integer> subject = PublishSubject.create();
-        view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                subject.onNext(position);
-            }
-        });
+        view.setOnItemClickListener((adapterView, view1, position, l) -> subject.onNext(position));
         return subject;
     }
 }

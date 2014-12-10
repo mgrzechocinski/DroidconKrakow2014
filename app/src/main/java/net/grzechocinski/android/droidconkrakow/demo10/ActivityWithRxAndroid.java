@@ -39,8 +39,6 @@ public class ActivityWithRxAndroid extends FragmentActivity {
 
     private ArrayList<Match> currentMatches = new ArrayList<>();
 
-    protected SpiceManager spiceManager = new SpiceManager(DemoSpiceService.class);
-
     private Subscription subscription;
 
     @Override
@@ -64,25 +62,19 @@ public class ActivityWithRxAndroid extends FragmentActivity {
         recyclerView.setAdapter(adapter);
 
         //  bind();
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                unsubscribe();
-                subscription = loadData(1)
-                        .cache()
-                        .subscribeOn(Schedulers.newThread())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Action1<Match>() {
-                            @Override
-                            public void call(Match match) {
-                                Delay.delayThreadForSeconds(3);
-                                currentMatches.clear();
-                                currentMatches.add(match);
-                                adapter.setCurrentMatches(currentMatches);
-                                adapter.notifyDataSetChanged();
-                            }
-                        });
-            }
+        refreshButton.setOnClickListener(v -> {
+            unsubscribe();
+            subscription = loadData(1)
+                    .cache()
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(match -> {
+                        Delay.delayThreadForSeconds(3);
+                        currentMatches.clear();
+                        currentMatches.add(match);
+                        adapter.setCurrentMatches(currentMatches);
+                        adapter.notifyDataSetChanged();
+                    });
         });
     }
 
@@ -135,16 +127,12 @@ public class ActivityWithRxAndroid extends FragmentActivity {
 
     private Observable<Match> loadData(final int matchID) {
 
-        return Observable.create(new Observable.OnSubscribe<Match>() {
-
-            @Override
-            public void call(Subscriber<? super Match> subscriber) {
-                try {
-                    subscriber.onNext(MatchDataSource.matches.get(matchID));
-                    subscriber.onCompleted();
-                } catch (Exception e) {
-                    subscriber.onError(e);
-                }
+        return Observable.create(subscriber -> {
+            try {
+                subscriber.onNext(MatchDataSource.matches.get(matchID));
+                subscriber.onCompleted();
+            } catch (Exception e) {
+                subscriber.onError(e);
             }
         });
     }

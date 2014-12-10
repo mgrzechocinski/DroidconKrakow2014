@@ -10,11 +10,6 @@ import android.widget.Toast;
 import net.grzechocinski.android.droidconkrakow.R;
 import rx.Observable;
 import rx.Subscription;
-import rx.android.events.OnTextChangeEvent;
-import rx.android.observables.ViewObservable;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.functions.Func2;
 
 //https://github.com/andrewhr/rxjava-android-example with modifications
 public class ComposeMessageActivity extends Activity {
@@ -32,9 +27,7 @@ public class ComposeMessageActivity extends Activity {
         final Observable<String> messageBodyText  = Events.text(messageBody);
         final Observable<Object> sendMessageClick = Events.click(sendMessage);
 
-        phoneNumberText.subscribe(System.out::println);
-
-        messageBodyText
+        Subscription subscribe = messageBodyText
                 .map(text -> !text.trim().equals(""))
                 .subscribe(Properties.enabledFrom(sendMessage));
 
